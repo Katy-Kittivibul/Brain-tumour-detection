@@ -1,0 +1,18 @@
+1. Run dataset.py to organize the data (if not already done).
+> .\venv\Scripts\python dataset.py
+
+2.Start training:
+> .\venv\Scripts\python train.py
+
+3.Run predictions on test_pic folder:
+> .\venv\Scripts\python predict.py
+
+4. Local API (Development)
+> python -m uvicorn app:app --reload
+
+5. Docker
+> docker build -t brain-tumor-api .
+> docker run -p 8000:8000 brain-tumor-api
+
+6. Test
+> curl -X POST "http://localhost:8000/predict" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "file=@test_pic/1.jpg"

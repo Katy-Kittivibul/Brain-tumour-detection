@@ -1,0 +1,10 @@
+ultralytics
+opencv-python
+matplotlib
+pandas
+seaborn
+ipython
+fastapi
+uvicorn
+python-multipart
+# onnxruntime-gpu # Optional: for faster inference if exporting to ONNX
