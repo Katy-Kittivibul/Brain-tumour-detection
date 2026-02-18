@@ -7,14 +7,21 @@ This project uses YOLOv8 to detect and classify brain tumors from MRI scans. It 
 - **Inference**: Batch prediction on local images.
 - **API**: FastAPI service for real-time prediction.
 - **Docker**: Containerized deployment capability.
+- **CI/CD**: Automated linting and testing via GitHub Actions.
 
 ## Project Structure
-- `train.py`: Script to train the YOLOv8 model.
-- `predict.py`: Script for batch inference on `test_pic/`.
-- `app.py`: FastAPI application for serving the model.
-- `inference.py`: Core inference logic.
-- `config.py`: Configuration settings (paths, hyperparameters).
+- `src/`: Source code directory.
+    - `train.py`: Script to train the YOLOv8 model.
+    - `predict.py`: Script for batch inference on `test_pic/`.
+    - `app.py`: FastAPI application for serving the model.
+    - `inference.py`: Core inference logic.
+    - `config.py`: Configuration settings (paths, hyperparameters).
+    - `dataset.py`: Data preparation script.
+    - `check_env.py`: Environment verification script.
+- `models/`: Directory for trained model weights (`.pt` files).
+- `tests/`: Unit and integration tests.
 - `Dockerfile`: Docker build instructions.
+- `.github/workflows/`: CI/CD pipeline configuration.
 
 ## Installation
 
@@ -27,7 +34,10 @@ This project uses YOLOv8 to detect and classify brain tumors from MRI scans. It 
 2. **Create a virtual environment**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   # On Windows
+   .\venv\Scripts\activate
+   # On macOS/Linux
+   source venv/bin/activate
    ```
 
 3. **Install dependencies**
@@ -40,25 +50,36 @@ This project uses YOLOv8 to detect and classify brain tumors from MRI scans. It 
 ### Training
 To train the model on your dataset:
 ```bash
-python train.py
+python src/train.py
 ```
-*Adjust hyperparameters in `config.py`.*
+*Adjust hyperparameters in `src/config.py`.*
 
 ### Batch Prediction
 To run predictions on a folder of images:
 1. Place images in `test_pic/`.
 2. Run:
    ```bash
-   python predict.py
+   python src/predict.py
    ```
 Results are saved to `runs/detect/predictions`.
 
 ### Web API (FastAPI)
 Start the server locally:
 ```bash
-python -m uvicorn app:app --reload
+uvicorn src.app:app --reload
 ```
 Visit http://127.0.0.1:8000/docs to test the API interactively.
+
+### Testing & Linting
+Run unit tests:
+```bash
+pytest
+```
+
+Check code quality:
+```bash
+flake8 .
+```
 
 ### Docker
 Build and run the container:
