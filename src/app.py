@@ -6,6 +6,7 @@ from inference import BrainTumorClassifier
 # Global model instance
 classifier = None
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Load model on startup
@@ -14,17 +15,25 @@ async def lifespan(app: FastAPI):
     yield
     # Clean up (if needed)
 
+
 app = FastAPI(title="Brain Tumor MRI Detection API", lifespan=lifespan)
+
 
 @app.get("/")
 def home():
-    return {"message": "Brain Tumor MRI Detection API is running. Use /predict to analyze images."}
+    return {
+        "message": (
+            "Brain Tumor MRI Detection API is running. "
+            "Use /predict to analyze images."
+        )
+    }
+
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File must be an image only.")
-    
+
     try:
         content = await file.read()
         result = classifier.predict_image(content)

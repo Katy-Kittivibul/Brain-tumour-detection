@@ -1,11 +1,10 @@
-import os
 from pathlib import Path
 
 # --- Configuration ---
 # Define base paths
 BASE_DATA_DIR = Path("data")  # Path to the 'data' folder
-YOLO_ROOT_DIR = Path("yolov8_data") # Path where YOLOv8 formatted data will be stored
-TEST_PIC_DIR = Path("test_pic") # Path to test images
+YOLO_ROOT_DIR = Path("yolov8_data")  # Path where YOLOv8 formatted data will be stored
+TEST_PIC_DIR = Path("test_pic")  # Path to test images
 
 # Define classes in the dataset
 CLASS_NAMES = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']

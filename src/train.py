@@ -1,6 +1,6 @@
 from ultralytics import YOLO
-from pathlib import Path
 from config import YOLO_ROOT_DIR, IMG_SIZE, BATCH_SIZE, EPOCHS, LEARNING_RATE, WORKERS, DEVICE
+
 
 def train():
     # Ensure data.yaml exists
@@ -10,7 +10,7 @@ def train():
         return
 
     # Load a model
-    model = YOLO("yolov8n.pt")  # Switch to Nano model for speed
+    model = YOLO("models/yolov8n.pt")  # Switch to Nano model for speed
 
     # Training arguments with strong augmentation
     train_args = dict(
@@ -24,9 +24,9 @@ def train():
         device=DEVICE,
         
         # Optimization
-        cache=True, # Cache images for faster training
-        patience=10, # Early stopping
-        
+        cache=True,  # Cache images for faster training
+        patience=10,  # Early stopping
+
         # Augmentation Hyperparameters
         mosaic=0.0,      # Disable mosaic for speed
         mixup=0.0,       # Disable mixup for speed
@@ -34,7 +34,7 @@ def train():
         fliplr=0.5,      # image flip left-right
         scale=0.5,       # image scale (+/- gain)
         shear=2.5,       # image shear (+/- deg)
-        perspective=0.0005, # image perspective (+/- fraction)
+        perspective=0.0005,  # image perspective (+/- fraction)
         hsv_h=0.015,     # image HSV-Hue augmentation
         hsv_s=0.7,       # image HSV-Saturation augmentation
         hsv_v=0.4,       # image HSV-Value augmentation
@@ -43,6 +43,7 @@ def train():
     print(f"🚀 Starting training with batch={BATCH_SIZE}, workers={WORKERS}...")
     model.train(**train_args)
     print("✅ Training finished. Check runs/detect/brain_tumor_yolov8 for results.")
+
 
 if __name__ == '__main__':
     # multiprocessing support for Windows

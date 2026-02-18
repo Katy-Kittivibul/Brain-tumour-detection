@@ -1,9 +1,9 @@
-import cv2
 import numpy as np
 from ultralytics import YOLO
 from PIL import Image
 import io
-from config import MODEL_PATH, CLASS_NAMES
+from config import MODEL_PATH
+
 
 class BrainTumorClassifier:
     def __init__(self, model_path=None):
@@ -55,6 +55,7 @@ class BrainTumorClassifier:
                 })
         
         return {"predictions": detections}
+
 
 if __name__ == "__main__":
     # Simple test if run directly
