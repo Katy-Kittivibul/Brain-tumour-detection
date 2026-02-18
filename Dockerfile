@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Add src to PYTHONPATH so imports work
-ENV PYTHONPATH="/app/src:${PYTHONPATH}"
+ENV PYTHONPATH="/app/src"
 
 # Expose port
 EXPOSE 8000
