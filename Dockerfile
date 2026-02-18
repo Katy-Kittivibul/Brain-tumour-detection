@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install system dependencies for OpenCV and other libs
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Add src to PYTHONPATH so imports work
-ENV PYTHONPATH="${PYTHONPATH}:/app/src"
+ENV PYTHONPATH="/app/src:${PYTHONPATH}"
 
 # Expose port
 EXPOSE 8000
