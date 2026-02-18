@@ -81,6 +81,10 @@ Check code quality:
 flake8 .
 ```
 
+
+### Troubleshooting
+**CI/CD Build Failure**: If you encounter `Package 'libgl1-mesa-glx' has no installation candidate`, ensure your Dockerfile uses `libgl1` instead. This is due to the base image using a newer Debian version where the legacy package is removed.
+
 ### Docker
 Build and run the container:
 ```bash

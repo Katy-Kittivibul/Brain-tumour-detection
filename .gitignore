@@ -20,3 +20,6 @@ test_pic/
 # OS
 Thumbs.db
 Desktop.ini
+
+# Local error logs
+build_errors.txt
